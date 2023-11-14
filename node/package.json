@@ -1,0 +1,23 @@
+{
+  "name": "intu-node-sdk",
+  "version": "1.0.0",
+  "description": "sdk for developers to have a easier use of intu SDK",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "compile": "tsc",
+    "tsc": "tsc",
+    "start": "npx tsx src/index.ts",
+    "all": "tsc -p tsconfig.json && npx tsx ./dist/index",
+    "tsn": "npx ts-node src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@intuweb3/node": "0.99.51",
+    "dotenv": "^16.3.1",
+    "esm": "^3.2.25",
+    "ethers": "5.7.2",
+    "webpack": "^5.88.2"
+  }
+}
