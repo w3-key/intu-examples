@@ -9,7 +9,6 @@ import {
   getUserPreRegisterInfos,
   automateRegistration,
   registerAllSteps,
-  getUserRegistrationAllInfos,
   submitTransaction,
   signTx,
   combineSignedTx,
@@ -19,15 +18,17 @@ import "dotenv/config";
 
 //insert your Endpoint here
 const jsonRpcProvider = new ethers.providers.JsonRpcProvider(`https://sepolia.infura.io/v3/${process.env.JSONRPCID}`);
-
+console.log(jsonRpcProvider);
+async function createSigner(key: string): Promise<ethers.Signer> {
+  const wallet = new ethers.Wallet(key);
+  const signer = wallet.connect(jsonRpcProvider);
+  return signer;
+}
 (async () => {
-  const signer1 = ethers.Wallet.createRandom();
-  const signer2 = ethers.Wallet.createRandom();
-  const signer3 = ethers.Wallet.createRandom();
-  //or if you want to try some keys of your own, edit the .env file to put some private keys in there and
-  //const signer1 = await createSigner(process.env.SIGNER1);
-  //const signer2 = await createSigner(process.env.SIGNER2);
-  //const signer3 = await createSigner(process.env.SIGNER3);
+  //Edit the .env file, put some private keys in there, and change the name to .env
+  const signer1 = await createSigner(process.env.SIGNER1 || "A");
+  const signer2 = await createSigner(process.env.SIGNER2 || "B");
+  const signer3 = await createSigner(process.env.SIGNER3 || "C");
   const signerAddress1 = await signer1.getAddress();
   const signerAddress2 = await signer2.getAddress();
   const signerAddress3 = await signer3.getAddress();
@@ -127,9 +128,9 @@ const jsonRpcProvider = new ethers.providers.JsonRpcProvider(`https://sepolia.in
     let combineTx = async () => {
       let txId = 1;
       let hash = await combineSignedTx(vaultAddress, txId, signer2);
-      let p = new ethers.providers.JsonRpcProvider(`https://sepolia.infura.io/v3/${process.env.JSONRPCID}`);
       console.log(hash.combinedTxHash.finalSignedTransaction);
-      p.sendTransaction(hash.combinedTxHash.finalSignedTransaction)
+      jsonRpcProvider
+        .sendTransaction(hash.combinedTxHash.finalSignedTransaction)
         .then((txResponse) => {
           console.log("Transaction Hash:", txResponse.hash);
         })
