@@ -1,4 +1,10 @@
-You could run localhost:3000 in 3 separate browsers with 3 separate wallets to test it, or you can run in a single browser and keep switching accounts as needed (for pre-register and automateregistration)
+First, edit the .env.example file to input some test private keys and your infura endpoint ID, and rename the file to just .env
+
+You have 2 options to test it:
+
+1. Run localhost:3000 in 3 separate browsers with 3 separate wallets (unique one in each browser).  
+   or
+2. You can run in a single browser and keep switching accounts as needed (for pre-registration, automate, and storing data)
 
 First, you will want to edit App.js and put in some addresses you have control over.  
 Click vault create, which will create a smart contract that they will all use to interact with eachother.

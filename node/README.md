@@ -1,3 +1,5 @@
+First, edit the .env.example file to input some test private keys and your infura endpoint ID, and rename the file to just .env
+
 Ideally, you would run this codebase in 3 separate terminals.
 
 First, run it just in one single terminal to create the vault for the 3 terminals/signer to interact with.
