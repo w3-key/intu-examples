@@ -132,7 +132,6 @@ let reshareCombine = async () => {
   let hash = await combineSignedTx(myVaultAddress, txId, signer);
   //let p = new ethers.providers.JsonRpcProvider("https://bsc-testnet.publicnode.com");
   let p = new ethers.providers.JsonRpcProvider("https://sepolia.infura.io/v3/a6122371120a4819ae02bac868b9d07a");
-
   console.log(hash.combinedTxHash.finalSignedTransaction);
   p.sendTransaction(hash.combinedTxHash.finalSignedTransaction)
     .then((txResponse) => {
@@ -175,23 +174,28 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>INTU</div>
-        <div>Your 0x: {signerAddress}</div>
-        <div>Vault Contract: {signerAddress}</div>
-        <div>Vault EOA: {signerAddress}</div>
+        <div>Your EOA: {signerAddress}</div>
+        <div>Vault Contract: {myVaultAddress ? myVaultAddress : "n/a"}</div>
+        <div>Vault EOA: {currentVault.masterPublicAddress ? currentVault.masterPublicAddress : "n/a"}</div>
         {!loading ? (
           <>
             <button onClick={() => vCreate()}>vault create</button>
-            {/*<div>Pre Register?: {preRegsiter.parisEncKey.length > 10 ? "true" : "false"}</div>*/}
             <button onClick={() => preReg()}>pre register</button>
             <button onClick={() => ar()}>automateRegistration</button>
             <button onClick={() => regAll()}>store my keys / finalize registration</button>
-            {/*<div>Vault Complete?: {myIntuAccounts && myIntuAccounts[0].masterPublicAddress ? myIntuAccounts[0].masterPublicAddress : "no"}</div>*/}
             <button onClick={() => cVault()}>completeVault</button>
-            <button onClick={() => submitTx()}>submittx</button>
-            <button onClick={() => signTransactions()}>signtx</button>
-            <button onClick={() => combineTx()}>combinetx</button>
+            {myIntuAccounts && myIntuAccounts[myIntuAccounts.length - 1].masterPublicAddress !== "" ? (
+              <>
+                <button onClick={() => submitTx()}>submittx</button>
+                <button onClick={() => signTransactions()}>signtx</button>
+                <button onClick={() => combineTx()}>combinetx</button>
+              </>
+            ) : (
+              ""
+            )}
             <hr />
             <hr />
+            {/*
             <div>Resharing tests</div>
             <button onClick={() => proposeUser()}>proposeUser</button>
             <button onClick={() => resharePre()}>reshare pre</button>
@@ -201,6 +205,7 @@ function App() {
             <button onClick={() => reshareStep3()}>reshare step 3</button>
             <button onClick={() => reshareSign()}>reshare sign tx</button>
             <button onClick={() => reshareCombine()}>reshare combine signatures</button>
+        */}
           </>
         ) : (
           "waiting on others...."
