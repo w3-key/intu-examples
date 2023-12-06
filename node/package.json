@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@intuweb3/node": "^0.99.52",
+    "@intuweb3/node": "^0.99.54",
     "@noble/secp256k1": "^2.0.0",
     "@polybase/client": "^0.6.6",
     "dotenv": "^16.3.1",
