@@ -46,9 +46,9 @@ if (myVaultAddress !== "0x1") {
 
 let vCreate = async () => {
   const proposedAddresses = [
-    "0x1111111111111111111111111111111111111111",
-    "0x2222222222222222222222222222222222222222",
-    "0x3333333333333333333333333333333333333333",
+    "0x1111111111111111111111111111111111111111", // FILL IN YOUR ADDRESSES HERE
+    "0x2222222222222222222222222222222222222222", // FILL IN YOUR ADDRESSES HERE
+    "0x3333333333333333333333333333333333333333", // FILL IN YOUR ADDRESSES HERE
   ];
   await vaultCreation(proposedAddresses, "New Vault", 60, 60, 60, signer);
 };
@@ -180,10 +180,16 @@ function App() {
         {!loading ? (
           <>
             <button onClick={() => vCreate()}>vault create</button>
-            <button onClick={() => preReg()}>pre register</button>
-            <button onClick={() => ar()}>automateRegistration</button>
-            <button onClick={() => regAll()}>store my keys / finalize registration</button>
-            <button onClick={() => cVault()}>completeVault</button>
+            {myIntuAccounts.length > 0 ? (
+              <>
+                <button onClick={() => preReg()}>pre register</button>
+                <button onClick={() => ar()}>automateRegistration</button>
+                <button onClick={() => regAll()}>store my keys / finalize registration</button>
+                <button onClick={() => cVault()}>completeVault</button>
+              </>
+            ) : (
+              ""
+            )}
             {myIntuAccounts && myIntuAccounts[myIntuAccounts.length - 1].masterPublicAddress !== "" ? (
               <>
                 <button onClick={() => submitTx()}>submittx</button>
